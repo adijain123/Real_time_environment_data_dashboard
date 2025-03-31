@@ -22,7 +22,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/', indexRouter);
-
 // Socket.IO connection handler
 io.on('connection', (socket) => {
   console.log('New client connected');
@@ -42,19 +41,19 @@ io.on('connection', (socket) => {
   });
 });
 
-// Set up interval for real-time data updates
-const FETCH_INTERVAL = 15000; // 15 seconds
-setInterval(async () => {
-  try {
-    const data = await fetchData();
-    io.emit('dataUpdate', data); // Broadcast to all connected clients
+// // Set up interval for real-time data updates
+// const FETCH_INTERVAL = 15000; // 15 seconds
+// setInterval(async () => {
+//   try {
+//     const data = await fetchData();
+//     io.emit('dataUpdate', data); // Broadcast to all connected clients
     
-    const timestamp = new Date().toLocaleTimeString();
-    console.log(`Data updated at ${timestamp}`);
-  } catch (error) {
-    console.error('Error in data update interval:', error);
-  }
-}, FETCH_INTERVAL);
+//     const timestamp = new Date().toLocaleTimeString();
+//     console.log(`Data updated at ${timestamp}`);
+//   } catch (error) {
+//     console.error('Error in data update interval:', error);
+//   }
+// }, FETCH_INTERVAL);
 
 // Start server
 server.listen(PORT, () => {
